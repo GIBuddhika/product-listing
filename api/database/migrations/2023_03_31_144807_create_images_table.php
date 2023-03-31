@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('entity', 15);
             $table->bigInteger('entity_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
