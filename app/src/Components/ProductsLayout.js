@@ -1,41 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styled from 'styled-components';
 import Product from './Product';
 import { Typography } from './Typography.styles';
-import { Link } from "react-router-dom"
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from "react-router-dom";
 
 const ProductsLayout = () => {
-
-    //get products
-    let [products, setProducts] = useState();
-    let [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        setProducts([
-            { id: 1, name: 'cat 1', image: 'https://pbs.twimg.com/profile_images/1501565644092936193/SefiCXEl_400x400.jpg' },
-            { id: 2, name: 'cat 1', image: 'https://pbs.twimg.com/profile_images/1501565644092936193/SefiCXEl_400x400.jpg' },
-            { id: 3, name: 'cat 1', image: 'https://pbs.twimg.com/profile_images/1501565644092936193/SefiCXEl_400x400.jpg' },
-            { id: 4, name: 'cat 1', image: 'https://pbs.twimg.com/profile_images/1501565644092936193/SefiCXEl_400x400.jpg' },
-        ]);
-        setLoading(false);
-    }, [])
+    const dispatch = useDispatch();
+    const productsResults = useSelector((state) => state.products.data);
+    const isLoading = useSelector((state) => state.categories.loading);
+    let navigate = useNavigate();
 
     return (
         <ProductsLayoutWrapper>
 
             <>
                 <Typography variant='h1'>Products</Typography>
-                {!loading &&
+                {!isLoading &&
                     <>
                         <UL>
-                            {
-                                products.map((product) =>
-                                    <LI key={product.id} >
-                                        <Link to={'/product/' + product.id}>
-                                            <Product product={product} />
-                                        </Link>
+                            {productsResults.length > 0 ?
+                                productsResults.map((product) =>
+                                    <LI key={product.id} onClick={() => { navigate('/product/' + product.id) }}>
+                                        <Product product={product} />
                                     </LI>
                                 )
+                                :
+                                <Typography variant='paragraph'>No products found.</Typography>
                             }
                         </UL>
                     </>
@@ -59,6 +50,7 @@ const LI = styled.li`
     padding: 20px;
     margin-bottom: 20px;
     list-style: none;
+    cursor: pointer;
     
     &:hover{
         background-color:#e3e39c;

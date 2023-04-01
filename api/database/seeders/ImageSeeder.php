@@ -103,7 +103,12 @@ class ImageSeeder extends Seeder
                 [
                     'entity' => 'category',
                     'entity_id' => 6,
-                    'location' => 'https://i.ebayimg.com/thumbs/images/g/LjoAAOSwXNBfNyUm/s-l960.webp',
+                    'location' => 'https://img.etimg.com/thumb/msid-98443222,width-300,height-225,imgsize-406474,,resizemode-75/automobile-retail-sales-see-double-digit-growth-in-feb-on-robust-demand.jpg',
+                ],
+                [
+                    'entity' => 'category',
+                    'entity_id' => 4,
+                    'location' => 'https://i.guim.co.uk/img/media/03734ee186eba543fb3d0e35db2a90a14a5d79e3/0_173_5200_3120/master/5200.jpg?width=620&quality=45&dpr=2&s=none',
                 ],
             ]
         );

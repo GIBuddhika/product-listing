@@ -7,6 +7,11 @@ const variantsMapping = {
         size: "50px",
         weight: "900"
     },
+    h2: {
+        tag: "h2",
+        size: "30px",
+        weight: "900"
+    },
     paragraph: {
         size: "16px",
         tag: "p",

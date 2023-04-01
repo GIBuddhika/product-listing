@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
 import Categories from './Categories';
 import { Typography } from './Typography.styles';
 
 const Sidebar = () => {
+
     return (
         <SidebarWrapper>
             <Typography variant='h1'>Categories</Typography>

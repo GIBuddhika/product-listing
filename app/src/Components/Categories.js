@@ -1,34 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import Category from './Category';
 import { Col, Row } from 'react-bootstrap';
+import { useSelector, useDispatch } from 'react-redux'
+import { CategoriesAll } from '../Reducers/Categories/CategoriesAll';
+import { ProductsAll } from '../Reducers/Products/ProductsAll';
 
 const Categories = () => {
 
-  //get categories
-  let [categories, setCategories] = useState();
-  let [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const categoriesResults = useSelector((state) => state.categories.data);
+  const isLoading = useSelector((state) => state.categories.loading);
+  console.log(isLoading);
+  console.log(categoriesResults);
 
   useEffect(() => {
-    setCategories([
-      { id: 1, name: 'cat 1', image: 'https://pbs.twimg.com/profile_images/1501565644092936193/SefiCXEl_400x400.jpg' },
-      { id: 2, name: 'cat 1', image: 'https://pbs.twimg.com/profile_images/1501565644092936193/SefiCXEl_400x400.jpg' },
-      { id: 3, name: 'cat 1', image: 'https://pbs.twimg.com/profile_images/1501565644092936193/SefiCXEl_400x400.jpg' },
-      { id: 4, name: 'cat 1', image: 'https://pbs.twimg.com/profile_images/1501565644092936193/SefiCXEl_400x400.jpg' },
-    ]);
-    setLoading(false);
-  }, [])
+    dispatch(CategoriesAll());
+    dispatch(ProductsAll());
+  }, [dispatch]);
 
   const search = (category) => {
-    console.log(category);
+    dispatch(ProductsAll({ category_id: category.id }));
   }
 
   return (
     <>
-      {!loading &&
+      {!isLoading &&
         <>
           <Row>
             {
-              categories.map((category) =>
+              categoriesResults.map((category) =>
                 <Col xs={6} key={category.id}>
                   <Category category={category} search={() => search(category)} />
                 </Col>
