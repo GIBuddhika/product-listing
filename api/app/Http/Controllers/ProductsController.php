@@ -6,12 +6,15 @@ use App\Http\Requests\ProductCreateRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use App\Interfaces\ProductRepoInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
-    public function search()
+    public function search(Request $request)
     {
-        $searchDetails = [];
+        $searchDetails = [
+            'category_id' => $request->category_id
+        ];
         try {
             $products = $this->getProductRepoInterface()->search($searchDetails);
             return response($products, 200);

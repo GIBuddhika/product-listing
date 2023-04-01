@@ -4,12 +4,22 @@ namespace App\Repositories;
 
 use App\Interfaces\ProductRepoInterface;
 use App\Models\Product;
+use Illuminate\Database\Eloquent\Builder;
 
 class ProductRepo implements ProductRepoInterface
 {
     public function search($searchDetails)
     {
-        return Product::all();
+        $productsQ = Product::query();
+        $productsQ->with('images');
+
+        if (isset($searchDetails['category_id'])) {
+            $productsQ->whereHas('categories', function (Builder $query) use ($searchDetails) {
+                $query->where('id', $searchDetails['category_id']);
+            });
+        }
+
+        return $productsQ->get();
     }
 
     public function getById($productId)
