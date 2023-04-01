@@ -30,13 +30,12 @@ const { productsRequested, productsReceived, productsRequestFailed } = slice.act
 
 const url = "/products";
 
-export const ProductsAll = (props) => (dispatch) => {
-    console.log(props);
+export const ProductsAll = (params) => (dispatch) => {
     return dispatch(
         apiCallBegan({
             url,
             method: 'GET',
-            params: props,
+            params: params,
             onStart: productsRequested.type,
             onSuccess: productsReceived.type,
             onError: productsRequestFailed.type,

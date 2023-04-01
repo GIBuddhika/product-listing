@@ -2,11 +2,10 @@ import React from 'react'
 import styled from 'styled-components';
 import Product from './Product';
 import { Typography } from './Typography.styles';
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from "react-router-dom";
 
 const ProductsLayout = () => {
-    const dispatch = useDispatch();
     const productsResults = useSelector((state) => state.products.data);
     const isLoading = useSelector((state) => state.categories.loading);
     let navigate = useNavigate();

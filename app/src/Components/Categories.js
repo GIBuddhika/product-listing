@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Category from './Category';
 import { Col, Row } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux'
 import { CategoriesAll } from '../Reducers/Categories/CategoriesAll';
 import { ProductsAll } from '../Reducers/Products/ProductsAll';
+import { setActiveCategory } from '../Reducers/Categories/CategoryActive';
 
 const Categories = () => {
 
   const dispatch = useDispatch();
-  const categoriesResults = useSelector((state) => state.categories.data);
+  const categoriesResults = useSelector((state) => state.categories.all.data);
   const isLoading = useSelector((state) => state.categories.loading);
-  console.log(isLoading);
-  console.log(categoriesResults);
 
   useEffect(() => {
     dispatch(CategoriesAll());
@@ -20,6 +19,7 @@ const Categories = () => {
 
   const search = (category) => {
     dispatch(ProductsAll({ category_id: category.id }));
+    dispatch(setActiveCategory({ category_id: category.id }));
   }
 
   return (

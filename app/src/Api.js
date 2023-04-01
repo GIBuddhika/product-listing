@@ -25,9 +25,6 @@ const Api =
                         method,
                         data,
                         params
-                        // params: {
-                        //     api_key: 'process.env.NASA_API_KEY',
-                        // },
                     });
                     // General
                     dispatch(apiCallSucess(response.data));

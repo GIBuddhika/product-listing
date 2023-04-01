@@ -3,9 +3,14 @@ import CategoriesAll from './Reducers/Categories/CategoriesAll'
 import Api from './Api'
 import { combineReducers } from 'redux';
 import ProductsAll from './Reducers/Products/ProductsAll';
+import CategoryActive from './Reducers/Categories/CategoryActive';
 
 const rootReducer = combineReducers({
-    categories: CategoriesAll,
+    categories:
+        combineReducers({
+            all: CategoriesAll,
+            active: CategoryActive,
+        }),
     products: ProductsAll,
 })
 
