@@ -11,8 +11,8 @@ class Category extends Model
     use HasFactory;
     use SoftDeletes;
 
-    public function products()
+    public function images()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->hasMany(Image::class, 'entity_id')->where('entity', 'category');
     }
 }

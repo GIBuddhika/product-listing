@@ -9,7 +9,7 @@ class CategoryRepo implements CategoryRepoInterface
 {
     public function getAll()
     {
-        return Category::all();
+        return Category::with('images')->get();
     }
 
     public function getById($categoryId)
