@@ -53,7 +53,7 @@ class CategoriesController extends Controller
             $category = $this->getCategoryRepoInterface()->update($id, $data);
             return response($category, 200);
         } catch (ModelNotFoundException $th) {
-            return response($th->getMessage(), 404);
+            return response([], 404);
         } catch (\Throwable $th) {
             return response($th->getMessage(), 500);
         }
