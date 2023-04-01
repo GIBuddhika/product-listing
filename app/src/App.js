@@ -1,22 +1,25 @@
 import './App.css';
-import Sidebar from './Components/sidebar';
-import { Col, Container, Row } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Products from './Components/products';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './Pages/Home';
+import Product from './Pages/Product';
 
+const routes = [
+  { path: '/', element: <Home /> },
+  { path: '/product/:id', element: <Product /> },
+];
 
 function App() {
   return (
-    <Container fluid>
-      <Row>
-        <Col xs={4}>
-          <Sidebar />
-        </Col>
-        <Col>
-          <Products />
-        </Col>
-      </Row>
-    </Container>
+    <BrowserRouter>
+      <Routes>
+        {
+          routes.map((route, idx) => {
+            return <Route key={`route-${idx}`} {...route} />
+          })
+        }
+      </Routes>
+    </BrowserRouter>
   );
 }
 
