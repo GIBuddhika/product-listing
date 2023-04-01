@@ -13,6 +13,7 @@ const Product = ({ product }) => {
                 <Col>
                     <Typography variant='h2'>{product.name}</Typography>
                     <Typography variant='paragraph'>{product.description}</Typography>
+                    <Typography variant='h2'><b>${product.price}</b></Typography>
                 </Col>
             </Row>
         </>
