@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { CategoriesAll } from '../Reducers/Categories/CategoriesAll';
 import { ProductsAll } from '../Reducers/Products/ProductsAll';
 import { setActiveCategory } from '../Reducers/Categories/CategoryActive';
+import { setCurrentPage } from '../Reducers/Products/Common';
 
 const Categories = () => {
 
@@ -12,14 +13,23 @@ const Categories = () => {
   const categoriesResults = useSelector((state) => state.categories.all.data);
   const isLoading = useSelector((state) => state.categories.loading);
   const activeCategory = useSelector((state) => state.categories.active.id);
+  const perPage = useSelector((state) => state.products.common.perPage);
+  const currentPage = useSelector((state) => state.products.common.currentPage);
 
   useEffect(() => {
     dispatch(CategoriesAll());
-    dispatch(ProductsAll({ category_id: activeCategory }));
-  }, [dispatch, activeCategory]);
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(ProductsAll({
+      category_id: activeCategory,
+      page: currentPage,
+      per_page: perPage
+    }));
+  }, [dispatch, activeCategory, currentPage, perPage]);
 
   const search = (category) => {
-    dispatch(ProductsAll({ category_id: category.id }));
+    dispatch(setCurrentPage(1))
     dispatch(setActiveCategory({ category_id: category.id }));
   }
 

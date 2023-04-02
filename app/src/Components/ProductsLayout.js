@@ -4,10 +4,14 @@ import Product from './Product';
 import { Typography } from './Typography.styles';
 import { useSelector } from 'react-redux'
 import { useNavigate } from "react-router-dom";
+import Pagination from './Pagination';
 
 const ProductsLayout = () => {
     const productsResults = useSelector((state) => state.products.all.data);
+    const productsTotal = useSelector((state) => state.products.all.total);
     const isLoading = useSelector((state) => state.categories.loading);
+    const currentPage = useSelector((state) => state.products.common.currentPage);
+    const perPage = useSelector((state) => state.products.common.perPage);
     let navigate = useNavigate();
 
     return (
@@ -16,17 +20,21 @@ const ProductsLayout = () => {
                 <Typography variant='h1'>Products</Typography>
                 {!isLoading &&
                     <>
-                        <UL>
-                            {productsResults.length > 0 ?
-                                productsResults.map((product) =>
-                                    <LI key={product.id} onClick={() => { navigate('/product/' + product.id) }}>
-                                        <Product product={product} />
-                                    </LI>
-                                )
-                                :
-                                <Typography variant='paragraph'>No products found.</Typography>
-                            }
-                        </UL>
+                        {productsResults.length > 0 ?
+                            <>
+                                <UL>{
+                                    productsResults.map((product) =>
+                                        <LI key={product.id} onClick={() => { navigate('/product/' + product.id) }}>
+                                            <Product product={product} />
+                                        </LI>
+                                    )
+                                }
+                                </UL>
+                                <Pagination totalProducts={productsTotal} perPage={perPage} currentPage={currentPage} callBackEntity={'products'} />
+                            </>
+                            :
+                            <Typography variant='paragraph'>No products found.</Typography>
+                        }
                     </>
                 }
             </>

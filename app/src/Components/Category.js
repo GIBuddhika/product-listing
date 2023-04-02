@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 
 const Category = ({ category, search }) => {
     const activeCategory = useSelector((state) => state.categories.active.id);
-    console.log(activeCategory);
 
     return (
         <CategoryWrapper onClick={search} className={activeCategory === category.id ? 'active' : ''}>

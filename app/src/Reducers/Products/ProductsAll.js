@@ -5,6 +5,7 @@ const slice = createSlice({
     name: "products",
     initialState: {
         data: [],
+        total: null,
         loading: true,
     },
 
@@ -14,7 +15,8 @@ const slice = createSlice({
         },
 
         productsReceived: (products, action) => {
-            products.data = action.payload;
+            products.data = action.payload.results;
+            products.total = action.payload.total;
             products.loading = false;
         },
 

@@ -5,6 +5,7 @@ import { combineReducers } from 'redux';
 import ProductsAll from './Reducers/Products/ProductsAll';
 import CategoryActive from './Reducers/Categories/CategoryActive';
 import ProductsOne from './Reducers/Products/ProductsOne';
+import Common from './Reducers/Products/Common';
 
 const rootReducer = combineReducers({
     categories:
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
         combineReducers({
             all: ProductsAll,
             one: ProductsOne,
+            common: Common
         }),
 })
 

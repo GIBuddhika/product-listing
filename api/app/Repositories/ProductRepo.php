@@ -19,7 +19,19 @@ class ProductRepo implements ProductRepoInterface
             });
         }
 
-        return $productsQ->get();
+        $total = $productsQ->count();
+
+        if (isset($searchDetails['per_page'])) {
+            $productsQ->take($searchDetails['per_page'])
+                ->skip($searchDetails['per_page'] * ($searchDetails['page'] - 1));
+        }
+
+        $products = $productsQ->get();
+
+        return [
+            'total' => $total,
+            'results' => $products
+        ];
     }
 
     public function getById($productId)

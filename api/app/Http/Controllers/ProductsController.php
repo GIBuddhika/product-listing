@@ -13,7 +13,9 @@ class ProductsController extends Controller
     public function search(Request $request)
     {
         $searchDetails = [
-            'category_id' => $request->category_id
+            'category_id' => $request->category_id,
+            'per_page' => $request->per_page,
+            'page' => $request->page,
         ];
         try {
             $products = $this->getProductRepoInterface()->search($searchDetails);
