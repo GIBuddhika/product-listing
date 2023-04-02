@@ -19,7 +19,7 @@ class ProductCreateRequest extends FormRequest
             'name' => 'required',
             'description' => 'required',
             'price' => 'required|numeric|regex:/^[0-9]\d{0,9}(\.\d{1,2})?%?$/',
-            'quantitiy' => 'required|numeric',
+            'quantity' => 'required|numeric',
         ];
     }
 
