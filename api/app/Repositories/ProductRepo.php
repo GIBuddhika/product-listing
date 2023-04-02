@@ -24,7 +24,7 @@ class ProductRepo implements ProductRepoInterface
 
     public function getById($productId)
     {
-        return Product::findOrFail($productId);
+        return Product::with('images')->where('id', $productId)->firstOrFail();
     }
 
     public function delete($productId)

@@ -4,6 +4,7 @@ import Api from './Api'
 import { combineReducers } from 'redux';
 import ProductsAll from './Reducers/Products/ProductsAll';
 import CategoryActive from './Reducers/Categories/CategoryActive';
+import ProductsOne from './Reducers/Products/ProductsOne';
 
 const rootReducer = combineReducers({
     categories:
@@ -11,7 +12,11 @@ const rootReducer = combineReducers({
             all: CategoriesAll,
             active: CategoryActive,
         }),
-    products: ProductsAll,
+    products:
+        combineReducers({
+            all: ProductsAll,
+            one: ProductsOne,
+        }),
 })
 
 export default configureStore({

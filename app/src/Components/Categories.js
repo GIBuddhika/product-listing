@@ -11,11 +11,12 @@ const Categories = () => {
   const dispatch = useDispatch();
   const categoriesResults = useSelector((state) => state.categories.all.data);
   const isLoading = useSelector((state) => state.categories.loading);
+  const activeCategory = useSelector((state) => state.categories.active.id);
 
   useEffect(() => {
     dispatch(CategoriesAll());
-    dispatch(ProductsAll());
-  }, [dispatch]);
+    dispatch(ProductsAll({ category_id: activeCategory }));
+  }, [dispatch, activeCategory]);
 
   const search = (category) => {
     dispatch(ProductsAll({ category_id: category.id }));

@@ -6,13 +6,12 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from "react-router-dom";
 
 const ProductsLayout = () => {
-    const productsResults = useSelector((state) => state.products.data);
+    const productsResults = useSelector((state) => state.products.all.data);
     const isLoading = useSelector((state) => state.categories.loading);
     let navigate = useNavigate();
 
     return (
         <ProductsLayoutWrapper>
-
             <>
                 <Typography variant='h1'>Products</Typography>
                 {!isLoading &&
