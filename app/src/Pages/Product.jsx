@@ -26,6 +26,7 @@ const Product = () => {
                         :
                         <>
                             <Link to={'/'}>&lt;-- Back</Link>
+                            <br /><br />
                             <Typography variant='h1'>{productResults.name}</Typography>
                             <Row>
                                 <Col xs={4}>

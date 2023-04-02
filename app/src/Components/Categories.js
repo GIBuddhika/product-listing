@@ -6,6 +6,8 @@ import { CategoriesAll } from '../Reducers/Categories/CategoriesAll';
 import { ProductsAll } from '../Reducers/Products/ProductsAll';
 import { setActiveCategory } from '../Reducers/Categories/CategoryActive';
 import { setCurrentPage } from '../Reducers/Products/Common';
+import { Typography } from './Typography.styles';
+import styled from 'styled-components';
 
 const Categories = () => {
 
@@ -33,10 +35,17 @@ const Categories = () => {
     dispatch(setActiveCategory({ category_id: category.id }));
   }
 
+  const removeSelectedCategory = () => {
+    dispatch(setActiveCategory({ category_id: null }));
+  }
+
   return (
     <>
       {!isLoading &&
         <>
+          <ViewAll>
+            <Typography variant='paragraph' margin="0" onClick={() => removeSelectedCategory()}>View all products</Typography>
+          </ViewAll>
           <Row>
             {
               categoriesResults.map((category) =>
@@ -53,3 +62,12 @@ const Categories = () => {
 }
 
 export default Categories
+
+const ViewAll = styled.div`
+  text-align: center; 
+  padding: 10px;
+  background: chocolate;
+  width: 200px;
+  margin: 0 auto 20px auto;
+  cursor: pointer;
+`;
